@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="ui form" action="" method="POST">
+    <select class="ui dropdown">
+      <i class="dropdown icon"></i>
+      {% for user in s %}
+          <option name="user" value="{{user.id}}">{{user.name}}</option>
+      {% endfor %}
+    </select>
+    <div class="ui blue submit button">submit</div>
+</form>
+
+<script>
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
+
+{% endblock %}

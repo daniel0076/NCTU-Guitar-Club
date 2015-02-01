@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="ui form" action="" method="post">
+{% csrf_token %}
+    <input type="hidden" name="username" value="nctuguitar">
+    <div class="field">
+        <label>Password</label>
+        <div class="ui icon input">
+            <input type="password" name="password">
+            <i class="lock icon"></i>
+        </div>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit" class="ui submit blue button" >Login</button>
+</form>
+{% endblock %}
