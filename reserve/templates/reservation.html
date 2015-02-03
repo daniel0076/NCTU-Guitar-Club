@@ -1,5 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>test</p>
+<link href="{{ STATIC_URL }}css/reservation.css" rel="stylesheet">
+<div class="reserve">
+    <form class="ui form" action="/send/" method="POST">
+        {% csrf_token %}
+        <div class="field">
+            <label>活動名稱</label>
+            <input name="act_name" type="text" placeholder="輸入活動名稱"></input>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>聯絡人</label>
+                <select class="ui dropdown" name="contact">
+                    <i class="dropdown icon"></i>
+                    {% for u in s %}
+                    <option value="{{u.id}}">{{u.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                <label>場地名稱</label>
+                <select class="ui dropdown" name="place">
+                    <i class="dropdown icon"></i>
+                    <option value=11>四樓陽台</option>
+                    <option value=1>四樓聯誼廳</option>
+                    <option value=15>一樓聯誼廳</option>
+                    <option value=2>二樓聯誼廳</option>
+                    <option value=3>B1 聯誼廳</option>
+                    <option value=4>露天劇場</option>
+                    <option value=5>思源前廊</option>
+                    <option value=6>地下室中庭</option>
+                    <option value=7>一樓中庭</option>
+                    <option value=9>三樓中庭</option>
+                    <option value=10>中正堂聯誼廳</option>
+                    <option value=12>溜冰場</option>
+                    <option value=13>五樓陽台</option>
+                    <option value=14>韻律教室</option>
+                </select>
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>選擇年月</label>
+                <select class="ui dropdown" name="year_month">
+                    <i class="dropdown icon"></i>
+                    {% for ym in year_month %}
+                    <option value="{{ym}}">{{ym}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                <label>選擇日期</label>
+                <select class="ui dropdown" name="date">
+                    <i class="dropdown icon"></i>
+                    {% for d in days %}
+                    <option value="{{d}}">{{d}}日</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                <label>選擇時段</label>
+                <div>
+                    <div class="ui toggle checkbox">
+                        <input name="time" type="radio" value="0">
+                        <label>早上</label>
+                    </div>
+                    <div class="ui toggle checkbox">
+                        <input name="time" type="radio" value="1">
+                        <label>中午</label>
+                    </div>
+                </div>
+                <div>
+                    <div class="ui toggle checkbox">
+                        <input name="time" type="radio" value="2">
+                        <label>下午</label>
+                    </div>
+                    <div class="ui toggle checkbox">
+                        <input name="time" type="radio" value="3">
+                        <label>晚上</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="ok" value="yes">
+        <button class="ui blue submit button" type="submit">施法</button>
+    </form>
+</div>
+
+<script>
+$('.ui.dropdown')
+.dropdown();
+
+$('.ui.checkbox')
+.checkbox() ;
+</script>
+
 {% endblock %}

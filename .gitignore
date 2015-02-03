@@ -4,3 +4,4 @@ settings.*
 db.*
 */migrations
 static/
+place_rent_bot.py
