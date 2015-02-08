@@ -44,8 +44,13 @@ def send(request):
         date        =request.POST.get('date')
         time        =request.POST.get('time')
 
-        data=book(contact_man,phone,email,stuid,
-                act_name,place,year_month,date,time)
+        #date validation
+        book_date=datetime.strptime("{0}-{1}".format(year_month,date),"%Y-%m-%d")
+        if datetime.today().date() >= book_date.date():
+            res="日期錯誤，不能預約過去"
+            return render(request,'send.html',{'res':res})
+
+        data=book(contact_man,phone,email,stuid,act_name,place,year_month,date,time)
         re_pattern="<script>alert\('(.*).{4}'\);</script>"
         if '資料庫語法錯誤' in data and 'alert' not in data:
             res="施法成功"
@@ -55,7 +60,6 @@ def send(request):
                 res="施法失敗，未知原因，請連絡管理員"
             else:
                 res="施法失敗，{0}".format(warning.group(1))
-
 
         return render(request,'send.html',{'res':res})
 
