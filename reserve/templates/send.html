@@ -2,5 +2,11 @@
 
 
 {% block content %}
-<p>結果：{{res}}</p>
+<div class="result">
+    <p>結果：{{res}}</p>
+    <div class="buttons">
+        <a class="ui blue button" href={% url 'reserve' %}>繼續預約</a>
+        <a class="ui green button" href={% url 'record' %}>看記錄</a>
+    </div>
+</div>
 {% endblock %}

@@ -13,7 +13,7 @@
             <div class="field">
                 <label>聯絡人</label>
                 <select class="ui dropdown" name="contact">
-                    <i class="dropdown icon"></i>
+                    <option value=>選擇聯絡人</option>
                     {% for u in s %}
                     <option value="{{u.id}}">{{u.name}}</option>
                     {% endfor %}

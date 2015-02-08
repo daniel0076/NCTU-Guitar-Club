@@ -2,8 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth.views import login,logout
 from django.core.urlresolvers import reverse
-from reserve.views import reserve,send,record,cancel
-from place_rent.views import index
+from reserve.views import index,reserve,send,record,cancel
 
 admin.autodiscover()
 urlpatterns = patterns('',

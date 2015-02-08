@@ -10,7 +10,7 @@ from operator import itemgetter
 # Create your views here.
 
 def index(request):
-	return render(request,'index/index.html')
+    return render(request,'index/index.html')
 # use index/index.html to use the template in generic template folder rather than the one in the app
 
 
