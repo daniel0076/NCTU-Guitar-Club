@@ -3,7 +3,7 @@
 {% block content %}
 <link href="{{ STATIC_URL }}css/reservation.css" rel="stylesheet">
 <div class="reserve">
-    <form class="ui form" action="/send/" method="POST">
+    <form class="ui form" action="{% url 'send' %}" method="POST">
         {% csrf_token %}
         <div class="field">
             <label>活動名稱</label>

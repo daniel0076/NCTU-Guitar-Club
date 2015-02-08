@@ -1,8 +1,3 @@
-#!/bin/env python
-
-#This is the same version as place_rent_bot,
-#only the username and password are removed
-
 import requests
 from urllib.parse import quote
 
@@ -27,7 +22,7 @@ def login():
     login_url='https://sasystem.nctu.edu.tw/place_rent/main.php'
     logout_url='https://sasystem.nctu.edu.tw/place_rent/login.php'
     record_url='https://sasystem.nctu.edu.tw/place_rent/main.php?tp=applysplace&'
-    data='loginuser=youruser&loginpw=yourpassword&test=test'
+    data='loginuser=user&loginpw=pw&test=test'
     #proxy={'https':'https://127.0.0.1:8080'} #debug
     global sess
     sess=requests.Session()
@@ -40,11 +35,25 @@ def logout():
     sess.close()
 
 
-def record():
+def get_record():
     global sess
     login()
-    r=sess.get(record_url,headers=headers)
+    r=sess.get(record_url,headers=headers_get)
     logout()
+    return (r.content).decode('big5')
+
+def make_cancel(serial):
+    global sess
+    cancel_url='https://sasystem.nctu.edu.tw/place_rent/send.php'
+    if serial is not None:
+        data={'ser':serial,'poiuytrewq':'G'}
+        login()
+        r=sess.post(cancel_url,data=data,headers=headers_post)
+        logout()
+        return (r.content).decode('big5')
+    else:
+        return serial
+
 
 def book(contact_man,phone,email,stuid,act_name,place,year_month,date,time):
     global sess

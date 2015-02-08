@@ -3,4 +3,8 @@ from reserve.models import staff
 
 # Register your models here.
 
-admin.site.register(staff)
+
+class staffAdmin(admin.ModelAdmin):
+    list_display=('name','stuid','phone','email')
+
+admin.site.register(staff,staffAdmin)

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="r_table">
+    <table class="ui striped table">
+        <thead>
+            <th>活動名稱</th>
+            <th>地點</th>
+            <th>日期</th>
+            <th>時間</th>
+            <th>聯絡人</th>
+            <th>狀態</th>
+            <th>動作</th>
+        </thead>
+        <tbody>
+    {% for r in records%}
+
+        <tr>
+            <td>{{r.0}}</td>
+            <td>{{r.1}}</td>
+            <td>{{r.4}}</td>
+            <td>{{r.5}}</td>
+            <td>{{r.2}}</td>
+            <td>{{r.6}}</td>
+            <td>
+                <form action="{% url 'cancel' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="ser" value="{{r.7}}">
+                    <input type="hidden" name="ok" value="ok">
+                    <button class="ui red button" type="submit">
+                        取消
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
