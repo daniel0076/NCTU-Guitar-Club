@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="candidates">
+    <h2>抽獎名單</h2>
+    {% for value in candidates %}
+    <div class="ui label">
+    {{value}}
+    </div>
+    {% endfor %}
+    {% for key,value in selected.items %}
+    <div class="ui label">{{key}}</div>
+    {% endfor %}
+</div>
+<div class="content">
+    <h2>獎項</h2>
+    <div class="ui blue label">
+       1 - 價值1200烏克莉莉1把(一名)
+    </div>
+    <div class="ui blue label">
+       2 - 價值3000古典吉他1把(一名)
+    </div>
+    <h2>中獎者</h2>
+    {% for key,value in selected.items %}
+    <div class="ui label">{{forloop.counter}} - {{key}}</div>
+    {% endfor %}
+</div>
+{% endblock %}
