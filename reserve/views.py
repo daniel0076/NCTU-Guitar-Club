@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import  HttpResponseRedirect
-from reserve.models import staff,Records,Misc,Memo
+from reserve.models import staff,Records,Misc
 from datetime import datetime
 from reserve.place_rent_bot import *
 from reserve.lottery import *
@@ -22,24 +22,21 @@ def lottery(request):
     return render(request,'lottery.html',locals())
 
 @login_required
-def memo(request):
+def settings(request):
     if 'ok' in request.POST:
-        act_name    =request.POST.get('act_name')
-        place       =request.POST.get('place')
-        date        =request.POST.get('date')
-        time        =request.POST.get('time')
-        other       =request.POST.get('other')
-        if other is None:
-            other=""
-        Memo.objects.create(act_name=act_name,place=place,date=date,time=time,other=other,status="未預約")
+        stuid =request.POST.get('stuid')
+        name  =request.POST.get('name')
+        phone =request.POST.get('phone')
+        email =request.POST.get('email')
+        staff.objects.create(name=name,email=email,phone=phone,stuid=stuid)
 
     if 'del' in request.POST:
         pid =request.POST.get('id')
-        Memo.objects.filter(id=pid).delete()
+        staff.objects.filter(id=pid).delete()
 
-    memos=Memo.objects.order_by('date')
+    staffs=staff.objects.order_by('stuid')
 
-    return render(request,'memo.html',locals())
+    return render(request,'settings.html',locals())
 # use index/index.html to use the template in generic template folder rather than the one in the app
 
 
@@ -88,9 +85,9 @@ def send(request):
         else:
             warning=re.search(re_pattern,data)
             if warning is None:
-                res="施法失敗，未知原因，請連絡管理員"
+                res="施法失敗，未知原因，請連絡idaniel.twc@gmail.com"
             else:
-                res="施法失敗，{0}".format(warning.group(1))
+                res="施法失敗，{0}，請連絡idaniel.twc@gmail.com".format(warning.group(1))
 
         return render(request,'send.html',{'res':res})
 

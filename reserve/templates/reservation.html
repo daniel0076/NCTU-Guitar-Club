@@ -2,7 +2,11 @@
 
 {% block content %}
 <link href="{{ STATIC_URL }}css/reservation.css" rel="stylesheet">
+
 <div class="reserve">
+    <div class="ui red message">
+        可以偷跑預約三個月之後的場地。如果要偷跑，大概在開放搶場前一小時偷跑就好，以免被學校察覺XD
+    </div>
     <form class="ui form" action="{% url 'send' %}" method="POST">
         {% csrf_token %}
         <div class="field">
@@ -11,7 +15,7 @@
         </div>
         <div class="two fields">
             <div class="field">
-                <label>聯絡人</label>
+                <label>聯絡人(幹部設定)</label>
                 <select class="ui dropdown" name="contact">
                     <option value=>選擇聯絡人</option>
                     {% for u in s %}
